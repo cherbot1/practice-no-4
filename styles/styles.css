@@ -149,15 +149,27 @@
     padding: 25px 20px;
 }
 
+.elements__like-checkbox {
+    display: none;
+}
+
+.elements__like-checkbox:checked + label {
+    background: url(../images/like_active.svg) no-repeat center center;
+}
+
+.elements__like-label {
+    align-self: flex-start;
+}
+
 .elements__like {
     width: 22px;
     height: 19px;
-    background-image: url('./images/like.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #ffffff;
+    background: url(../images/like.svg) no-repeat center center;
     border: none;
+}
+
+.elements__like:hover {
+    opacity: 50%;
 }
 
 .footer {
