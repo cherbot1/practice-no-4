@@ -116,7 +116,7 @@
 .elements__list {
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
     grid-row-gap: 20px;
     grid-column-gap: 17px;
     margin: 0;
@@ -127,6 +127,9 @@
     background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
 }
 
 .elements__figure {
@@ -137,6 +140,7 @@
 .elements__image {
     max-width: 282px;
     display: block;
+    width: 100%;
 }
 
 .elements__figcaption {
@@ -149,11 +153,19 @@
     padding: 25px 20px;
 }
 
+.elements__figcaption-text {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .elements__like-checkbox {
     display: none;
 }
 
-.elements__like-checkbox:checked + label {
+.elements__like-checkbox:checked + .elements__like-label {
     background: url(../images/like_active.svg) no-repeat center center;
 }
 
@@ -162,6 +174,8 @@
     background: url(../images/like.svg) no-repeat center center;
     width: 22px;
     height: 19px;
+    padding: 4px;
+    box-sizing: border-box;
 }
 
 .elements__like-label:hover {
@@ -221,6 +235,7 @@
     position: absolute;
     top: -40px;
     right: -40px;
+    cursor: pointer;
 }
 
 .popup__close:hover {
@@ -270,8 +285,48 @@
     color: #fff;
     border: none;
     max-width: 358px;
+    cursor: pointer;
+}
+
+.popup__save-button:hover {
+    opacity: 80%;
 }
 
 .popup_opened {
     display: block;
+}
+
+@media screen and (max-width: 930px){
+    .header {
+        margin: 0 30px 0 30px;
+    }
+    .profile {
+        margin: 0 30px 0 30px;
+    }
+    .elements {
+        margin: 0 30px 0 30px;
+    }
+    .elements__list {
+        grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+    }
+    .elements__image {
+        max-width: 330px;
+        max-height: 282px;
+        overflow: hidden;
+    }
+    .footer {
+        margin: 0 30px 0 30px;
+    }
+}
+
+@media screen and (max-width: 739px) {
+    .profile {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 507px) {
+    
 }

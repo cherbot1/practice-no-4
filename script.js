@@ -1,8 +1,11 @@
+let openPopupButton = document.querySelector('.profile__edit-button');
 let profileName = document.querySelector('.profile__name');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let nameInput = document.querySelector('.popup__input-name');
 let subtitleInput = document.querySelector('.popup__input-subtitle');
 let popup = document.querySelector('.edit-form__popup');
+
+openPopupButton.addEventListener('click', openPopup);
 
 function openPopup() {
     nameInput.value = profileName.textContent;
