@@ -15,7 +15,7 @@
     border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
-.logo {
+.header__logo {
     max-width: 142px;
     align-self: flex-start;
     margin: 0 0 41px 0;
@@ -328,5 +328,44 @@
 }
 
 @media screen and (max-width: 507px) {
-    
+    .elements__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile__profile-info {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .profile__subtitle {
+        text-align: center;
+    }
+
+    .profile__name {
+        position: relative;
+        right: 22px;
+    }
+
+    .profile__edit-button {
+        position: absolute;
+        margin: 0 0 0 10px;
+        right: -14px;
+        bottom: 32px;
+    }
+    .profile__add-button {
+        margin-top: 36px;
+        max-width: 282px;
+        width: 100%;
+    }
+    .header {
+        margin: 0 auto;
+        padding-top: 28px;
+    }
+    .header__logo {
+        margin-left: 27px;
+    }
 }
