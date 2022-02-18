@@ -158,14 +158,14 @@
 }
 
 .elements__like-label {
-    align-self: flex-start;
-}
-
-.elements__like {
+    align-self: center;
+    background: url(../images/like.svg) no-repeat center center;
     width: 22px;
     height: 19px;
-    background: url(../images/like.svg) no-repeat center center;
-    border: none;
+}
+
+.elements__like-label:hover {
+    opacity: 50%;
 }
 
 .elements__like:hover {
