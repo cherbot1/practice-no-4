@@ -23,11 +23,11 @@
             <div class="profile__profile-info">
                 <img class="profile__avatar" src="images/Avatar.png" alt="Аватар">
                 <div class="profile__profile-info-text">
-                    <h1 class="profile__title-name">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button" title="Редактировать"><img src="images/Edit_Button.svg" class="profile__edit-button-image" alt="Редактировать">
-                    </button>
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
+                <button class="profile__edit-button" onclick="openPopup()" title="Редактировать"><img src="images/Edit_Button.svg" class="profile__edit-button-image" alt="Редактировать">
+                </button>
             </div>
             <button class="profile__add-button" title="Добавить фото"><img class="profile__add-button-image" src="images/plus_button.svg" alt="Добавить"></button>
         </section>
@@ -61,7 +61,7 @@
                 <li class="elements__list-item">
                     <figure class="elements__figure">
                         <img class="elements__image" src="images/dombai.png" alt="Карачаевск">
-                        <figcaption class="elements__figcaption">Домбай<img src="images/like.svg" class="elements__like" alt="Нравится"></figcaption>
+                        <figcaption class="elements__figcaption">Домбай<button class="elements__like" title="Нравится"></button></figcaption>
                     </figure>
                 </li>
                 <li class="elements__list-item">
@@ -73,11 +73,24 @@
             </ul>
         </section>
 
+        <section class="edit-form">
+            <div class="edit-form__popup">
+                <div class="popup__container">
+                    <img src="images/close_icon.svg" class="popup__close" onclick="closePopup()" alt="Закрыть" title="Закрыть">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input type="text" class="popup__input popup__input-name" placeholder="Имя">
+                    <input type="text" class="popup__input popup__input-subtitle" placeholder="О себе">
+                    <button class="popup__save-button" onclick="changeProfileInfo()">Сохранить</button>
+                </div>
+            </div>
+        </section>
+
     </main>
     <footer class="footer">
         <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
     </footer>
 </div>
+<script src="script.js"></script>
 </body>
 
 </html>

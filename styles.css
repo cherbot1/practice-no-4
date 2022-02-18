@@ -30,11 +30,15 @@
     padding: 40px 0 0 0;
 }
 
-.profile__title-name {
+.profile__name {
     margin: 0;
     font-size: 2.625rem;
     line-height: 1.14;
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
 }
 
 .profile__subtitle {
@@ -42,12 +46,17 @@
     font-size: 1.125rem;
     line-height: 1.2;
     font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
 }
 
 .profile__profile-info {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+
 }
 
 .profile__avatar {
@@ -55,19 +64,19 @@
 }
 
 .profile__profile-info-text {
-    max-width: 336px;
     margin-top: 22px;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+    flex-direction: column;
 }
 
 .profile__edit-button {
-    margin: 0 0 5px 18px;
+    margin: 0 0 18px 18px;
     padding: 0;
     background-color: #000;
     border: none;
-    align-self: flex-end;
+    align-self: center;
     max-width: 24px;
     line-height: 1.14;
 }
@@ -107,7 +116,7 @@
 .elements__list {
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
     grid-row-gap: 20px;
     grid-column-gap: 17px;
     margin: 0;
@@ -140,6 +149,17 @@
     padding: 25px 20px;
 }
 
+.elements__like {
+    width: 22px;
+    height: 19px;
+    background-image: url('./images/like.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    border: none;
+}
+
 .footer {
     max-width: 880px;
     margin: 0 auto;
@@ -155,3 +175,91 @@
     font-weight: 400;
 }
 
+.edit-form__popup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+    display: none;
+}
+
+.popup__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    max-width: 430px;
+    position: fixed;
+    top: 195px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    border-radius: 10px;
+    padding: 34px 36px 37px 36px;
+    box-sizing: border-box;
+}
+
+.popup__close {
+    max-width: 32px;
+    position: absolute;
+    top: -40px;
+    right: -40px;
+}
+
+.popup__close:hover {
+    opacity: 60%;
+}
+
+.popup__title {
+    margin:0;
+    padding: 0;
+    color: #000;
+    font-weight: 900;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    align-self: flex-start;
+}
+
+.popup__input {
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.21;
+    color: #000;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 0 10px 0;
+    margin: 30px 0 0 0;
+    max-width: 358px;
+}
+
+.popup__input:nth-of-type(1) {
+    margin: 54px 0 0 0;
+}
+
+.popup__input:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+.popup__save-button {
+    margin: 48px 0 0 0;
+    padding: 14px 0;
+    width: 100%;
+    background-color: #000;
+    font-size: 1.125rem;
+    line-height: 1.2;
+    color: #fff;
+    border: none;
+    max-width: 358px;
+}
+
+.popup_opened {
+    display: block;
+}
