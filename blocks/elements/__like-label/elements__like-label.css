@@ -5,6 +5,7 @@
     height: 19px;
     padding: 4px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .elements__like-label:hover {
