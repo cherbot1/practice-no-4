@@ -1,0 +1,12 @@
+.elements__like-label {
+    align-self: center;
+    background: url(../../../images/like.svg) no-repeat center center;
+    width: 22px;
+    height: 19px;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.elements__like-label:hover {
+    opacity: 50%;
+}
