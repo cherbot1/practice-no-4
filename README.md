@@ -13,6 +13,6 @@
 * Изображение оптимизированы
 * Для лайков использованы checkbox
 
-Ссылка на gh-pages 
+Ссылка на gh-pages https://cherbot1.github.io/practice-no-4/
 
 
