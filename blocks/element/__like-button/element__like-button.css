@@ -1,4 +1,4 @@
-.elements__like-label {
+.element__like-button {
     align-self: center;
     background: url(../../../images/like.svg) no-repeat center center;
     width: 22px;
@@ -6,8 +6,9 @@
     padding: 4px;
     box-sizing: border-box;
     cursor: pointer;
+    border: none;
 }
 
-.elements__like-label:hover {
+.element__like-button:hover {
     opacity: 50%;
 }

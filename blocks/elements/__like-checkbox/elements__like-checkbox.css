@@ -1,7 +1,0 @@
-.elements__like-checkbox {
-    display: none;
-}
-
-.elements__like-checkbox:checked + .elements__like-label {
-    background: url(../../../images/like_active.svg) no-repeat center center;
-}
