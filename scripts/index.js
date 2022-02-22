@@ -26,7 +26,6 @@ function changeProfileInfo(event) {
     profileSubtitle.innerHTML = subtitleInput.value;
 
     closePopup();
-
 }
 
 
