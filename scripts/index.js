@@ -24,6 +24,8 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+
+
 let defaultElement = [];
 const elementTemplate = document.querySelector('#list-element').content;
 const elementsList = document.querySelector('.elements__list');
@@ -41,9 +43,8 @@ const closeAddPopupButton = document.querySelector('.popup-add__close');
 const saveNewCard = document.querySelector('.popup-add__form');
 const cardNameInput = document.querySelector('.popup-add__input_name');
 const cardLinkInput = document.querySelector('.popup-add__input_link');
-const fullImageSection = document.querySelector('.popup-image').content;
+const fullImageSection = document.querySelector('.popup-image');
 const imageCloseButton = document.querySelector('.popup-image__close');
-const imageToOpen = document.querySelector('.element__image-wrapper');
 
 
 function addDefaultCards() {
@@ -64,6 +65,14 @@ function addDefaultCards() {
             const elementForDelete = evt.target.closest('.element');
 
             elementForDelete.remove();
+        });
+
+        elementItem.querySelector('.element__image').addEventListener('click', function() {
+            fullImageSection.querySelector('.popup-image__image').src = this.src;
+            fullImageSection.querySelector('.popup-image__image').alt = this.alt;
+            fullImageSection.querySelector('.popup-image__subtitle').textContent = this.alt;
+
+            changeImagePopup();
         });
 
         elementsList.append(defaultElement[i]);
@@ -88,18 +97,18 @@ function addNewCard(event) {
 
         elementForDelete.remove();
     });
-    
+
+    elementItem.querySelector('.element__image').addEventListener('click', function() {
+        fullImageSection.querySelector('.popup-image__image').src = this.src;
+        fullImageSection.querySelector('.popup-image__image').alt = this.alt;
+        fullImageSection.querySelector('.popup-image__subtitle').textContent = this.alt;
+
+        changeImagePopup();
+    });
+
     elementsList.prepend(elementItem);
 
     changeAddPopup();
-}
-
-function openFullImage(e) {
-    fullImageSection.querySelector('.popup-image__subtitle').textContent = e.target.closest('.element__figcaption-text').textContent;
-    fullImageSection.querySelector('.popup-image__subtitle').src = e.target.closest('.element__image').src;
-    fullImageSection.querySelector('.popup-image__subtitle').alt = e.target.closest('.element__figcaption-text').textContent;
-
-    changeImagePopup();
 }
 
 function changeProfileInfo(event) {
@@ -128,6 +137,7 @@ function changeAddPopup() {
 function changeImagePopup() {
     document.querySelector('.popup-image').classList.toggle('popup-image_opened');
 }
+
 
 window.addEventListener('DOMContentLoaded', addDefaultCards);
 openPopupButton.addEventListener('click', changePopup);
