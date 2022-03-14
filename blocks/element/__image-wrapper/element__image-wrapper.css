@@ -1,0 +1,17 @@
+.element__image-wrapper {
+    width: 282px;
+    height: 282px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    cursor: pointer;
+
+}
+
+@media screen and (max-width: 930px) {
+    .element__image-wrapper {
+        max-width: 330px;
+        max-height: 186px;
+    }
+}

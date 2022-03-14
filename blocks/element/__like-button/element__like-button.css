@@ -1,7 +1,7 @@
 .element__like-button {
     align-self: center;
     background: url(../../../images/like.svg) no-repeat center center;
-    width: 22px;
+    width: 25px;
     height: 19px;
     padding: 4px;
     box-sizing: border-box;

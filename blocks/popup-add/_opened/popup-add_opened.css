@@ -1,0 +1,56 @@
+.popup-add_opened {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Картинка */
+
+.popup-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.popup-image__wrapper {
+    position: relative;
+}
+
+.popup-image__image {
+    margin: 0 auto;
+    max-width: 75vh;
+    max-height: 75vh;
+}
+
+.popup-image__subtitle {
+    justify-self: left;
+}
+
+.popup-image__close {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    cursor: pointer;
+    border: none;
+    top: -40px;
+    right: -40px;
+    margin: 0;
+    padding: 0;
+    background: url(../../../images/close_icon.svg) no-repeat;
+    background-size: cover;
+}
+
+.popup-image_opened {
+    visibility: visible;
+    opacity: 1;
+}

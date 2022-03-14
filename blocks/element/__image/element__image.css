@@ -1,13 +1,10 @@
 .element__image {
-    max-width: 282px;
-    display: block;
-    width: 100%;
+
 }
 
 @media screen and (max-width: 930px) {
     .element__image {
         max-width: 330px;
-        max-height: 282px;
-        overflow: hidden;
+        max-height: 186px;
     }
 }
