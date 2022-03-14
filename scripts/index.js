@@ -72,7 +72,7 @@ function addDefaultCards() {
             fullImageSection.querySelector('.popup-image__image').alt = this.alt;
             fullImageSection.querySelector('.popup-image__subtitle').textContent = this.alt;
 
-            changeImagePopup();
+            toggleImagePopup();
         });
 
         elementsList.append(defaultElement[i]);
@@ -103,12 +103,12 @@ function addNewCard(event) {
         fullImageSection.querySelector('.popup-image__image').alt = this.alt;
         fullImageSection.querySelector('.popup-image__subtitle').textContent = this.alt;
 
-        changeImagePopup();
+        toggleImagePopup();
     });
 
     elementsList.prepend(elementItem);
 
-    changeAddPopup();
+    toggleAddPopup();
 }
 
 function changeProfileInfo(event) {
@@ -117,34 +117,34 @@ function changeProfileInfo(event) {
     profileName.innerHTML = nameInput.value;
     profileSubtitle.innerHTML = subtitleInput.value;
 
-    changePopup();
+    togglePopup();
 }
 
-function changePopup() {
+function togglePopup() {
     nameInput.value = profileName.textContent;
     subtitleInput.value = profileSubtitle.textContent;
 
     popup.classList.toggle('popup_opened');
 }
 
-function changeAddPopup() {
+function toggleAddPopup() {
     cardLinkInput.value = null;
     cardNameInput.value = null;
 
     popupAdd.classList.toggle('popup-add_opened');
 }
 
-function changeImagePopup() {
+function toggleImagePopup() {
     document.querySelector('.popup-image').classList.toggle('popup-image_opened');
 }
 
 
 window.addEventListener('DOMContentLoaded', addDefaultCards);
-openPopupButton.addEventListener('click', changePopup);
-closePopupButton.addEventListener('click', changePopup);
-openAddPopupButton.addEventListener('click', changeAddPopup);
-closeAddPopupButton.addEventListener('click', changeAddPopup);
-imageCloseButton.addEventListener('click', changeImagePopup);
+openPopupButton.addEventListener('click', togglePopup);
+closePopupButton.addEventListener('click', togglePopup);
+openAddPopupButton.addEventListener('click', toggleAddPopup);
+closeAddPopupButton.addEventListener('click', toggleAddPopup);
+imageCloseButton.addEventListener('click', toggleImagePopup);
 popupSaveChanges.addEventListener('submit', changeProfileInfo);
 saveNewCard.addEventListener('submit', addNewCard);
 
