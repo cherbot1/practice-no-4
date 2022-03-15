@@ -11,7 +11,14 @@
 
 @media screen and (max-width: 930px) {
     .element__image-wrapper {
-        max-width: 330px;
-        max-height: 186px;
+        align-items: center;
+        width: 100%;
+        max-width: 340px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .element__image-wrapper {
+        max-width: 282px;
     }
 }
