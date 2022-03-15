@@ -71,6 +71,7 @@ function createCard(title, src, alt) {
         popupImageElementImage.alt = this.alt;
         popupImageElementText.textContent = this.alt;
 
+        console.log('click');
         openPopup(popupImage);
     });
 
