@@ -27,21 +27,21 @@ const initialCards = [
 
 
 const elementTemplate = document.querySelector('#list-element').content;
+const popupEdit = document.querySelector('.popup-edit');
+const popupAdd = document.querySelector('.popup-add');
+const popupImage = document.querySelector('.popup-image');
 const cardsContainer = document.querySelector('.elements__list');
 const nameInput = document.querySelector('.popup__input_name');
 const subtitleInput = document.querySelector('.popup__input_subtitle');
 const profileName = document.querySelector('.profile__name');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-const popupEdit = document.querySelector('.popup-edit');
 const buttonOpenEditPopup = document.querySelector('.profile__edit-button');
 const popupButtonClose = document.querySelector('.popup__close');
 const popupEditSaveChanges = document.querySelector('.popup-edit__form');
-const popupAdd = document.querySelector('.popup-add');
 const buttonOpenAddPopup = document.querySelector('.profile__add-button');
 const popupAddSaveChanges = document.querySelector('.popup-add__form');
 const cardNameInput = document.querySelector('.popup-add__input_name');
 const cardLinkInput = document.querySelector('.popup-add__input_link');
-const popupImage = document.querySelector('.popup-image');
 const popupImageElementImage =  popupImage.querySelector('.popup-image__image');
 const popupImageElementText =  popupImage.querySelector('.popup-image__subtitle');
 const popupAddCloseButton = document.querySelector('.popup-add__close');
