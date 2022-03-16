@@ -51,10 +51,11 @@ const popupImageCloseButton = document.querySelector('.popup-image__close');
 
 function createCard(title, src, alt) {
     const elementItem = elementTemplate.querySelector('.element').cloneNode(true);
+    const elementImage = elementItem.querySelector('.element__image');
 
     elementItem.querySelector('.element__figcaption-text').textContent = title;
-    elementItem.querySelector('.element__image').src = src;
-    elementItem.querySelector('.element__image').alt = alt;
+    elementImage.src = src;
+    elementImage.alt = alt;
 
     elementItem.querySelector('.element__like-button').addEventListener('click', function (evt) {
         evt.target.classList.toggle('element__like-button_active');
@@ -66,12 +67,11 @@ function createCard(title, src, alt) {
         elementForDelete.remove();
     });
 
-    elementItem.querySelector('.element__image').addEventListener('click', function () {
+    elementImage.addEventListener('click', function () {
         popupImageElementImage.src = this.src;
         popupImageElementImage.alt = this.alt;
         popupImageElementText.textContent = this.alt;
 
-        console.log('click');
         openPopup(popupImage);
     });
 
@@ -125,8 +125,8 @@ function closeButton() {
 function changeProfileInfo(event) {
     event.preventDefault();
 
-    profileName.innerHTML = nameInput.value;
-    profileSubtitle.innerHTML = subtitleInput.value;
+    profileName.textContent = nameInput.value;
+    profileSubtitle.textContent = subtitleInput.value;
 
     closePopup(popupEdit);
 }
@@ -139,8 +139,7 @@ function openEditPopup() {
 }
 
 function openAddPopup() {
-    cardLinkInput.value = null;
-    cardNameInput.value = null;
+    popupAddSaveChanges.reset();
 
     openPopup(popupAdd);
 }
