@@ -11,26 +11,12 @@ function enableValidation(param) {
     const form = document.querySelector(param.formSelector);
 
     form.addEventListener('input', function(evt) {
-        listenFormInput(evt, param);
+        
     })
 }
 
-function listenFormInput(evt, param) {
-    const input = evt.target;
 
 
-}
 
 
-function showError(param) {
-    const currentInput = document.querySelector(param.inputSelector);
-
-    currentInput.classList.add('popup__input_error');
-}
-
-function hideError(input) {
-    const currentInput = document.querySelector(param.inputSelector);
-
-    currentInput.classList.remove('popup__input_error');
-}
 
