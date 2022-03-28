@@ -121,25 +121,25 @@ function closePopup(popup) {
 }
 
 function closePopupWithoutCross(popup) {
-    const closeFunction = (evt) => {
+    const closeCustomFunction = (evt) => {
         if (evt.target === popup){
             closePopup(popup);
 
-            popup.removeEventListener('click', closeFunction);
+            popup.removeEventListener('mousedown', closeCustomFunction);
         }
     }
-    popup.addEventListener('click', closeFunction);
+    popup.addEventListener('mousedown', closeCustomFunction);
 }
 
 function closePopupWithEsc(popup) {
-    const closeFunction = (evt) => {
+    const closeCustomFunction = (evt) => {
         if (evt.key === 'Escape') {
             closePopup(popup);
 
-            document.removeEventListener('keydown', closeFunction);
+            document.removeEventListener('keydown', closeCustomFunction);
         }
     }
-    document.addEventListener('keydown', closeFunction);
+    document.addEventListener('keydown', closeCustomFunction);
 }
 
 function closeButton() {
