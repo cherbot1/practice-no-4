@@ -49,6 +49,7 @@ const popupEditCloseButton = document.querySelector('.popup-edit__close');
 const popupImageCloseButton = document.querySelector('.popup-image__close');
 
 
+
 function createCard(title, src, alt) {
     const elementItem = elementTemplate.querySelector('.element').cloneNode(true);
     const elementImage = elementItem.querySelector('.element__image');
@@ -73,6 +74,8 @@ function createCard(title, src, alt) {
         popupImageElementText.textContent = this.alt;
 
         openPopup(popupImage);
+        closePopupWithoutCross(popupImage);
+        closePopupWithEsc(popupImage);
     });
 
     return elementItem;
@@ -110,10 +113,33 @@ function addNewCard(e) {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+}
+
+function closePopupWithoutCross(popup) {
+    const closeFunction = (evt) => {
+        if (evt.target === popup){
+            closePopup(popup);
+
+            popup.removeEventListener('click', closeFunction);
+        }
+    }
+    popup.addEventListener('click', closeFunction);
+}
+
+function closePopupWithEsc(popup) {
+    const closeFunction = (evt) => {
+        if (evt.key === 'Escape') {
+            closePopup(popup);
+
+            document.removeEventListener('keydown', closeFunction);
+        }
+    }
+    document.addEventListener('keydown', closeFunction);
 }
 
 function closeButton() {
@@ -136,12 +162,16 @@ function openEditPopup() {
     subtitleInput.value = profileSubtitle.textContent;
 
     openPopup(popupEdit);
+    closePopupWithoutCross(popupEdit);
+    closePopupWithEsc(popupEdit);
 }
 
 function openAddPopup() {
     popupAddSaveChanges.reset();
 
     openPopup(popupAdd);
+    closePopupWithoutCross(popupAdd);
+    closePopupWithEsc(popupAdd);
 }
 
 
@@ -154,5 +184,4 @@ popupEditCloseButton.addEventListener('click', closeButton);
 popupImageCloseButton.addEventListener('click', closeButton);
 popupEditSaveChanges.addEventListener('submit', changeProfileInfo);
 popupAddSaveChanges.addEventListener('submit', addNewCard);
-
 
