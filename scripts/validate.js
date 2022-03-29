@@ -12,7 +12,11 @@ function enableValidation(param) {
 
     for (let i = 0; i < allForms.length; i++){
         allForms[i].addEventListener('input', (evt) => {
-            checkCurrentForm(evt, param);
+            const currentForm = evt.currentTarget;
+            const exactInput = evt.target;
+
+            changeButtonState(currentForm, param);
+            changeErrorState(exactInput, param);
         });
     }
 }
@@ -20,7 +24,7 @@ function enableValidation(param) {
 function changeButtonState(form, param) {
     const submitButton = form.querySelector(param.submitButtonSelector);
 
-    if (!form.validity){
+    if (!form.checkValidity()){
         submitButton.disabled = true;
         submitButton.classList.add(param.inactiveButtonClass);
     } else {
@@ -33,7 +37,7 @@ function changeErrorState(input, param) {
     const inputForValidation = document.querySelector(`#${input.id}`);
     const errorMessage = document.querySelector(`#${input.id}-error`);
 
-    if (!input.validity.valid){
+    if (!input.checkValidity()){
         inputForValidation.classList.add(param.inputErrorClass);
         errorMessage.classList.add(param.errorClass);
         errorMessage.textContent = input.validationMessage;
@@ -45,11 +49,4 @@ function changeErrorState(input, param) {
     }
 }
 
-function checkCurrentForm(evt, param) {
-    const currentForm = evt.currentTarget;
-    const exactInput = evt.target;
-
-    changeButtonState(currentForm, param);
-    changeErrorState(exactInput, param);
-}
 

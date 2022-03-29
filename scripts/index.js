@@ -74,8 +74,6 @@ function createCard(title, src, alt) {
         popupImageElementText.textContent = this.alt;
 
         openPopup(popupImage);
-        closePopupWithoutCross(popupImage);
-        closePopupWithEsc(popupImage);
     });
 
     return elementItem;
@@ -111,16 +109,21 @@ function addNewCard(e) {
     closePopup(popupAdd);
 }
 
+/* ----- Новые изменения ----- */
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
 
+    closePopupWithoutCross(popup);
+
+    document.addEventListener('keydown', closePopupWithEsc);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-}
 
-/* ----- Новые функции ----- */
+    document.removeEventListener('keydown', closePopupWithEsc);
+}
 
 function closePopupWithoutCross(popup) {
     const closeCustomFunction = (evt) => {
@@ -133,15 +136,12 @@ function closePopupWithoutCross(popup) {
     popup.addEventListener('mousedown', closeCustomFunction);
 }
 
-function closePopupWithEsc(popup) {
-    const closeCustomFunction = (evt) => {
-        if (evt.key === 'Escape') {
-            closePopup(popup);
+function closePopupWithEsc(evt) {
+    const openedPopup = document.querySelector('.popup_opened');
 
-            document.removeEventListener('keydown', closeCustomFunction);
-        }
+    if (evt.key === 'Escape') {
+        closePopup(openedPopup);
     }
-    document.addEventListener('keydown', closeCustomFunction);
 }
 
 /* ----- Конец новых функций ----- */
@@ -166,16 +166,12 @@ function openEditPopup() {
     subtitleInput.value = profileSubtitle.textContent;
 
     openPopup(popupEdit);
-    closePopupWithoutCross(popupEdit);
-    closePopupWithEsc(popupEdit);
 }
 
 function openAddPopup() {
     popupAddSaveChanges.reset();
 
     openPopup(popupAdd);
-    closePopupWithoutCross(popupAdd);
-    closePopupWithEsc(popupAdd);
 }
 
 
