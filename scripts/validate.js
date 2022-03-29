@@ -11,7 +11,9 @@ function enableValidation(param) {
     const allForms = document.querySelectorAll(param.formSelector);
 
     for (let i = 0; i < allForms.length; i++){
-        allForms[i].addEventListener('input', (evt) => checkCurrentForm(evt, param));
+        allForms[i].addEventListener('input', (evt) => {
+            checkCurrentForm(evt, param);
+        });
     }
 }
 
