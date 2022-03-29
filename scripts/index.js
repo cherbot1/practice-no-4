@@ -120,6 +120,8 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
+/* ----- Новые функции ----- */
+
 function closePopupWithoutCross(popup) {
     const closeCustomFunction = (evt) => {
         if (evt.target === popup){
@@ -141,6 +143,8 @@ function closePopupWithEsc(popup) {
     }
     document.addEventListener('keydown', closeCustomFunction);
 }
+
+/* ----- Конец новых функций ----- */
 
 function closeButton() {
     const popup = this.closest('.popup');

@@ -3,20 +3,51 @@ enableValidation({
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save-button',
     inactiveButtonClass: 'popup__save-button_disabled',
-    inputErrorClass: 'popup__input-error',
-    errorClass: 'popup__error_visible'
+    inputErrorClass: 'popup__input_not-valid',
+    errorClass: 'popup__input-error'
 });
 
 function enableValidation(param) {
-    const form = document.querySelector(param.formSelector);
+    const allForms = document.querySelectorAll(param.formSelector);
 
-    form.addEventListener('input', function(evt) {
-        
-    })
+    for (let i = 0; i < allForms.length; i++){
+        allForms[i].addEventListener('input', (evt) => checkCurrentForm(evt, param));
+    }
 }
 
+function changeButtonState(form, param) {
+    const submitButton = form.querySelector(param.submitButtonSelector);
 
+    if (!form.validity){
+        submitButton.disabled = true;
+        submitButton.classList.add(param.inactiveButtonClass);
+    } else {
+        submitButton.disabled = false;
+        submitButton.classList.remove(param.inactiveButtonClass);
+    }
+}
 
+function changeErrorState(input, param) {
+    const inputForValidation = document.querySelector(`#${input.id}`);
+    const errorMessage = document.querySelector(`#${input.id}-error`);
 
+    if (!input.validity.valid){
+        inputForValidation.classList.add(param.inputErrorClass);
+        errorMessage.classList.add(param.errorClass);
+        errorMessage.textContent = input.validationMessage;
+    }
+    else{
+        inputForValidation.classList.remove(param.inputErrorClass);
+        errorMessage.classList.remove(param.errorClass);
+        errorMessage.textContent = '';
+    }
+}
 
+function checkCurrentForm(evt, param) {
+    const currentForm = evt.currentTarget;
+    const exactInput = evt.target;
+
+    changeButtonState(currentForm, param);
+    changeErrorState(exactInput, param);
+}
 
