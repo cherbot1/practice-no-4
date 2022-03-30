@@ -34,16 +34,15 @@ function changeButtonState(form, param) {
 }
 
 function changeErrorState(input, param) {
-    const inputForValidation = document.querySelector(`#${input.id}`);
     const errorMessage = document.querySelector(`#${input.id}-error`);
 
     if (!input.checkValidity()){
-        inputForValidation.classList.add(param.inputErrorClass);
+        input.classList.add(param.inputErrorClass);
         errorMessage.classList.add(param.errorClass);
         errorMessage.textContent = input.validationMessage;
     }
     else{
-        inputForValidation.classList.remove(param.inputErrorClass);
+        input.classList.remove(param.inputErrorClass);
         errorMessage.classList.remove(param.errorClass);
         errorMessage.textContent = '';
     }
