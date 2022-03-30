@@ -46,6 +46,8 @@ const popupImageElementText =  popupImage.querySelector('.popup-image__subtitle'
 const popupAddCloseButton = document.querySelector('.popup-add__close');
 const popupEditCloseButton = document.querySelector('.popup-edit__close');
 const popupImageCloseButton = document.querySelector('.popup-image__close');
+const openedPopup = document.querySelector('.popup_opened');
+const saveButtonInAddPopup = document.querySelector('.popup-add__save-button');
 
 
 
@@ -111,8 +113,6 @@ function addNewCard(e) {
 function openPopup(popup) {
     popup.classList.add('popup_opened');
 
-    closePopupWithoutCross(popup);
-
     document.addEventListener('keydown', closePopupWithEsc);
     document.addEventListener('mousedown', closePopupWithoutCross);
 }
@@ -125,18 +125,14 @@ function closePopup(popup) {
 }
 
 function closePopupWithoutCross(evt) {
-    const openedPopup = document.querySelector('.popup_opened');
-
-        if (evt.target === openedPopup){
-            closePopup(openedPopup);
+        if (evt.target.classList.contains('popup_opened')){
+            closePopup(evt.target);
         }
 
 }
 
 function closePopupWithEsc(evt) {
     if (evt.key === 'Escape') {
-        const openedPopup = document.querySelector('.popup_opened');
-
         closePopup(openedPopup);
     }
 }
@@ -164,12 +160,10 @@ function openEditPopup() {
 }
 
 function openAddPopup() {
-    const addButton = document.querySelector('.popup-add__save-button');
-
     popupAddSaveChanges.reset();
 
-    addButton.classList.add('popup__save-button_disabled');
-    addButton.disabled = true;
+    saveButtonInAddPopup.classList.add('popup__save-button_disabled');
+    saveButtonInAddPopup.disabled = true;
 
     openPopup(popupAdd);
 }
