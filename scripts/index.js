@@ -46,7 +46,6 @@ const popupImageElementText =  popupImage.querySelector('.popup-image__subtitle'
 const popupAddCloseButton = document.querySelector('.popup-add__close');
 const popupEditCloseButton = document.querySelector('.popup-edit__close');
 const popupImageCloseButton = document.querySelector('.popup-image__close');
-const openedPopup = document.querySelector('.popup_opened');
 const saveButtonInAddPopup = document.querySelector('.popup-add__save-button');
 
 
@@ -133,6 +132,8 @@ function closePopupWithoutCross(evt) {
 
 function closePopupWithEsc(evt) {
     if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened');
+
         closePopup(openedPopup);
     }
 }
