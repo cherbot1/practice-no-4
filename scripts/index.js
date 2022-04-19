@@ -76,12 +76,12 @@ export function openPopup(popup) {
     popup.classList.add('popup_opened');
 
     document.addEventListener('keydown', closePopupWithEsc);
-    document.addEventListener('mousedown', closePopupWithoutCross);
+    popup.addEventListener('mousedown', closePopupWithoutCross);
 }
 
 /* Генерация карточек из массива initialCards на основании Card */
 initialCards.forEach((item) => {
-    const card = new Card (item.name, item.link);
+    const card = new Card (item.name, item.link, '.card-template');
     const cardElement = card.generateCard();
 
     document.querySelector('.elements__list').append(cardElement);
@@ -93,7 +93,7 @@ function addNewCard(e) {
 
     const title = cardNameInput.value;
     const src = cardLinkInput.value;
-    const card = new Card (title, src);
+    const card = new Card (title, src, '.card-template');
     const cardElement = card.generateCard();
 
     cardsContainer.prepend(cardElement);
