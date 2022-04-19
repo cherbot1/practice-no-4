@@ -1,24 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
-const formValidationParam = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_disabled',
-    inputErrorClass: 'popup__input_not-valid',
-    errorClass: 'popup__input-error'
-};
-
-const addForm = document.querySelector('.popup-add__form');
-const editForm = document.querySelector('.popup-edit__form');
-
-const validateAddForm = new FormValidator(formValidationParam,addForm);
-const validateEditForm = new FormValidator(formValidationParam,editForm);
-
-validateAddForm.enableValidation();
-validateEditForm.enableValidation();
-
 export const initialCards = [
     {
         name: 'Архыз',
@@ -46,9 +28,21 @@ export const initialCards = [
     }
 ];
 
+/* Экспорт необходимых переменных в Card */
 export const popupImage = document.querySelector('.popup-image');
 export const popupImageElementImage =  popupImage.querySelector('.popup-image__image');
 export const popupImageElementText =  popupImage.querySelector('.popup-image__subtitle');
+
+/* Параметры для валидатора */
+const formValidationParam = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__input_not-valid',
+    errorClass: 'popup__input-error'
+};
+
 const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
 const cardsContainer = document.querySelector('.elements__list');
@@ -66,8 +60,18 @@ const popupAddCloseButton = document.querySelector('.popup-add__close');
 const popupEditCloseButton = document.querySelector('.popup-edit__close');
 const popupImageCloseButton = document.querySelector('.popup-image__close');
 const saveButtonInAddPopup = document.querySelector('.popup-add__save-button');
+const addForm = document.querySelector('.popup-add__form');
+const editForm = document.querySelector('.popup-edit__form');
 
+/* Создание объектов валидации форм */
+const validateAddForm = new FormValidator(formValidationParam,addForm);
+const validateEditForm = new FormValidator(formValidationParam,editForm);
 
+/* Активация функции валидации */
+validateAddForm.enableValidation();
+validateEditForm.enableValidation();
+
+/* Экспорт функции в Card */
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
 
@@ -75,6 +79,15 @@ export function openPopup(popup) {
     document.addEventListener('mousedown', closePopupWithoutCross);
 }
 
+/* Генерация карточек из массива initialCards на основании Card */
+initialCards.forEach((item) => {
+    const card = new Card (item.name, item.link);
+    const cardElement = card.generateCard();
+
+    document.querySelector('.elements__list').append(cardElement);
+})
+
+/* Функция создания новой карточки в форме добавления с использованием объекта Card */
 function addNewCard(e) {
     e.preventDefault();
 
@@ -124,11 +137,13 @@ function changeProfileInfo(evt) {
     closePopup(popupEdit);
 }
 
+/* Функции открытия PopUp с проверкой валидации, чтобы ошибки не сохранялись при закрытии PopUp без сохранения изменений */
 function openEditPopup() {
     nameInput.value = profileName.textContent;
     subtitleInput.value = profileSubtitle.textContent;
 
     openPopup(popupEdit);
+    validateEditForm.resetValidation();
 }
 
 function openAddPopup() {
@@ -138,14 +153,9 @@ function openAddPopup() {
     saveButtonInAddPopup.disabled = true;
 
     openPopup(popupAdd);
+    validateAddForm.resetValidation();
 }
 
-initialCards.forEach((item) => {
-    const card = new Card (item.name, item.link);
-    const cardElement = card.generateCard();
-
-    document.querySelector('.elements__list').append(cardElement);
-})
 
 buttonOpenEditPopup.addEventListener('click', openEditPopup);
 buttonOpenAddPopup.addEventListener('click', openAddPopup);
