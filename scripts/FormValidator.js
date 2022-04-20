@@ -52,7 +52,12 @@ export class FormValidator {
     resetValidation = () => {
         this._changeButtonState();
         this._inputsArray.forEach((element) => {
-            this._changeErrorState(element);
+            const errorMessage = document.querySelector(`#${element.id}-error`);
+
+            if (element.classList.contains(this._inputErrorClass)) {
+                element.classList.remove(this._inputErrorClass);
+                errorMessage.classList.remove(this._errorClass);
+            }
         });
     }
 }

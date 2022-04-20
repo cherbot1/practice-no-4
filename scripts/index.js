@@ -101,6 +101,10 @@ function addNewCard(e) {
     closePopup(popupAdd);
 }
 
+function removeErrors() {
+
+}
+
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
 
