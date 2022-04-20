@@ -105,7 +105,7 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened');
 
     document.removeEventListener('keydown', closePopupWithEsc);
-    document.removeEventListener('mousedown', closePopupWithoutCross);
+    popup.removeEventListener('mousedown', closePopupWithoutCross);
 }
 
 function closePopupWithoutCross(evt) {
