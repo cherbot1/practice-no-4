@@ -1,5 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import Section from './Section.js';
 
 export const initialCards = [
     {
@@ -46,6 +47,7 @@ const formValidationParam = {
 const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
 const cardsContainer = document.querySelector('.elements__list');
+const cardsListSelector = '.elements__list';
 const nameInput = document.querySelector('.popup__input_name');
 const subtitleInput = document.querySelector('.popup__input_subtitle');
 const profileName = document.querySelector('.profile__name');
@@ -63,6 +65,16 @@ const saveButtonInAddPopup = document.querySelector('.popup-add__save-button');
 const addForm = document.querySelector('.popup-add__form');
 const editForm = document.querySelector('.popup-edit__form');
 
+/* Создание элементов по дефолту через Section */
+const defaultCards = new Section({items: initialCards, renderer: (item) => {
+        const card = new Card (item.name, item.link, '.card-template');
+        const cardElement = card.generateCard();
+
+        defaultCards.addItem(cardElement);
+    } }, cardsListSelector);
+
+defaultCards.renderItems();
+
 /* Создание объектов валидации форм */
 const validateAddForm = new FormValidator(formValidationParam,addForm);
 const validateEditForm = new FormValidator(formValidationParam,editForm);
@@ -78,14 +90,6 @@ export function openPopup(popup) {
     document.addEventListener('keydown', closePopupWithEsc);
     popup.addEventListener('mousedown', closePopupWithoutCross);
 }
-
-/* Генерация карточек из массива initialCards на основании Card */
-initialCards.forEach((item) => {
-    const card = new Card (item.name, item.link, '.card-template');
-    const cardElement = card.generateCard();
-
-    document.querySelector('.elements__list').append(cardElement);
-})
 
 /* Функция создания новой карточки в форме добавления с использованием объекта Card */
 function addNewCard(e) {
