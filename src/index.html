@@ -5,32 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
-    <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body>
 <div class="page">
 
     <header class="header">
-        <img class="header__logo" src="images/logo.svg" alt="Логотип">
+        <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип">
     </header>
 
     <main class="content">
 
         <section class="profile">
             <div class="profile__profile-info">
-                <img class="profile__avatar" src="images/Avatar.png" alt="Аватар">
+                <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Аватар">
                 <div class="profile__profile-info-text">
                     <div class="profile__name-with-edit-button">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button" type="button" aria-label="Редактировать" title="Редактировать"><img src="images/Edit_Button.svg" class="profile__edit-button-image" alt="Редактировать">
+                        <button class="profile__edit-button" type="button" aria-label="Редактировать" title="Редактировать"><img src="<%=require('./images/Edit_Button.svg')%>" class="profile__edit-button-image" alt="Редактировать">
                         </button>
                     </div>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
 
             </div>
-            <button class="profile__add-button" type="button" aria-label="Добавить фото" title="Добавить фото"><img class="profile__add-button-image" src="images/plus_button.svg" alt="Добавить"></button>
+            <button class="profile__add-button" type="button" aria-label="Добавить фото" title="Добавить фото"><img class="profile__add-button-image" src="<%=require('./images/plus_button.svg')%>" alt="Добавить"></button>
         </section>
 
         <section class="elements">
@@ -97,8 +96,7 @@
     </li>
 </template>
 
-<script type="module" src="./index.js"></script>
-
 </body>
 
 </html>
+
