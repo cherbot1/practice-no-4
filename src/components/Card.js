@@ -1,4 +1,5 @@
 export class Card {
+
     constructor(title, src, templateSelector, handleCardClick) {
         this._title = title;
         this._src = src;
@@ -28,6 +29,7 @@ export class Card {
             elementForDelete.remove();
         });
 
+        /* Используется внешняя функция обработчика клика по изображению (index.js) */
         this._element.querySelector('.element__image').addEventListener('click', () => {
             this._handleCardClick(this._title, this._src);
         });

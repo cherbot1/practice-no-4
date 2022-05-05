@@ -6,12 +6,14 @@ export default class Section {
         this._container = document.querySelector(containerSelector);
     }
 
+    /* Создаём карточку циклом, используя вводный колбэк */
     renderItems() {
         this._renderedItems.forEach((item) => {
             this._renderer(item);
         })
     }
 
+    /* Добавляем карточку на страницу */
     addItem(element) {
         this._container.prepend(element);
     }

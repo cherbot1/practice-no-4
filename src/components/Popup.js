@@ -20,6 +20,7 @@ export default class Popup {
         document.removeEventListener('keydown', this._closePopupWithEsc);
     }
 
+    /* Слушатели для закрытия popup по клику на крестик и по клику на оверлей */
     setEventListeners() {
         const popupCloseButton = this._popup.querySelector('.popup__close');
 

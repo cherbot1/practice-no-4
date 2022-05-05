@@ -9,22 +9,27 @@ export default class PopupWithForm extends Popup {
         this._inputList = this._popupForm.querySelectorAll('.popup__input');
     }
 
+    /* Собираем данные из инпутов форм */
     _getInputValues() {
-        this._formValues = {};
+        const formValues = {};
 
         this._inputList.forEach((element) => {
-            this._formValues[element.id] = element.value;
+            formValues[element.id] = element.value;
         });
 
-        return this._formValues;
+        console.log(formValues);
+
+        return formValues;
     }
 
+    /* Переписан метод для сброса валидации формы */
     close() {
         super.close();
 
         this._popupForm.reset();
     }
 
+    /* Переписан метод для предотвращения обновления страницы и сбору данных из инпутов при сабмите формы */
     setEventListeners() {
         super.setEventListeners();
 
