@@ -1,12 +1,12 @@
-import './pages/index.css';
-import { Card } from './components/Card.js';
-import { FormValidator } from './components/FormValidator.js';
-import Section from './components/Section.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
-import * as constants from './utils/constants.js';
-import * as utils from './utils/utils.js';
+import './index.css';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import * as constants from '../utils/constants.js';
+import * as utils from '../utils/utils.js';
 
 /* Создаём UserInfo */
 export const userInfo = new UserInfo(constants.nameSelector, constants.aboutSelector);
@@ -25,7 +25,7 @@ popupEdit.setEventListeners();
 /* Создаём PopupWithForm для popupAdd, вешаем слушателей */
 export const popupAdd = new PopupWithForm({popupSelector: constants.popupAddSelector,
     formSubmit: (data) => {
-        defaultCards.addItem(utils.newCard(data['place-name-input'], data['url-input']));
+        defaultCards.addItem(utils.createNewCard(data['place-name-input'], data['url-input']));
 
         popupAdd.close();
     }
@@ -44,10 +44,9 @@ popupWithImage.setEventListeners();
 
 /* Создание элементов по дефолту через Section */
 export const defaultCards = new Section({items: constants.initialCards, renderer: (item) => {
-        const card = new Card (item.name, item.link, '.card-template', handleCardClick);
-        const cardElement = card.generateCard();
+        const card = utils.createNewCard (item.name, item.link);
 
-        defaultCards.addItem(cardElement);
+        defaultCards.addItem(card);
     } }, constants.cardsListSelector);
 
 defaultCards.renderItems();

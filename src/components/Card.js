@@ -23,10 +23,8 @@ export class Card {
             evt.target.classList.toggle('element__like-button_active');
         });
 
-        this._element.querySelector('.element__delete-button').addEventListener('click', (evt) => {
-            const elementForDelete = evt.target.closest('.element');
-
-            elementForDelete.remove();
+        this._element.querySelector('.element__delete-button').addEventListener('click', () => {
+            this._element.remove();
         });
 
         /* Используется внешняя функция обработчика клика по изображению (index.js) */

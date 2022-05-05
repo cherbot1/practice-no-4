@@ -30,19 +30,22 @@ export class FormValidator {
         });
     }
 
-    _changeErrorState = (input) => {
-        const errorMessage = document.querySelector(`#${input.id}-error`);
+    _isValid = (element) => {
+        const errorMessage = document.querySelector(`#${element.id}-error`);
 
-        if (!input.checkValidity()){
-            input.classList.add(this._inputErrorClass);
+        if (!element.checkValidity()) {
+            element.classList.add(this._inputErrorClass);
             errorMessage.classList.add(this._errorClass);
-            errorMessage.textContent = input.validationMessage;
-        }
-        else{
-            input.classList.remove(this._inputErrorClass);
+            errorMessage.textContent = element.validationMessage;
+        } else {
+            element.classList.remove(this._inputErrorClass);
             errorMessage.classList.remove(this._errorClass);
             errorMessage.textContent = '';
         }
+    }
+
+    _changeErrorState = (input) => {
+        this._isValid(input);
     }
 
     enableValidation = () => {
@@ -52,11 +55,8 @@ export class FormValidator {
     resetValidation = () => {
         this._changeButtonState();
         this._inputsArray.forEach((element) => {
-            const errorMessage = document.querySelector(`#${element.id}-error`);
-
             if (element.classList.contains(this._inputErrorClass)) {
-                element.classList.remove(this._inputErrorClass);
-                errorMessage.classList.remove(this._errorClass);
+                this._isValid(element);
             }
         });
     }

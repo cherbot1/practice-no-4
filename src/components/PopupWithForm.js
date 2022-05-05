@@ -17,8 +17,6 @@ export default class PopupWithForm extends Popup {
             formValues[element.id] = element.value;
         });
 
-        console.log(formValues);
-
         return formValues;
     }
 

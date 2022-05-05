@@ -1,12 +1,9 @@
 import { Card } from '../components/Card.js';
 import * as constants from './constants.js';
-import * as index from '../index.js';
-
-/* Функция для открытия PopupWithImage */
-
+import * as index from '../pages/index.js';
 
 /* Функция создания новой карточки */
-export function newCard(link, name) {
+export function createNewCard(link, name) {
     const card = new Card (link, name, '.card-template', index.handleCardClick);
     const cardElement = card.generateCard();
 
