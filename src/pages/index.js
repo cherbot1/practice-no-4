@@ -5,11 +5,42 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from "../components/Api";
 import * as constants from '../utils/constants.js';
 import * as utils from '../utils/utils.js';
 
-/* Создаём UserInfo */
-export const userInfo = new UserInfo(constants.nameSelector, constants.aboutSelector);
+/* Создаём API */
+export const api = new Api({
+    url: 'https://nomoreparties.co/v1/cohort-41/',
+    headers: {
+        authorization: 'aa481936-6a56-438a-a67e-3ded844326aa',
+        "content-type": 'application/json'
+    }
+});
+
+/* Создаём UserInfo и подгружаем информацию о пользователе с сервера */
+export const userInfo = new UserInfo(constants.nameSelector, constants.aboutSelector, constants.avatarSelector);
+
+const userCloudInfo = api.getUserInfo();
+
+userCloudInfo.then((data) => {
+    userInfo.setUserInfo(data);
+});
+
+/* Создание элементов по дефолту с сервера через Section */
+const cardsCloudInfo = api.getCardsInfo();
+
+cardsCloudInfo.then((data) => {
+    data.map((cardInfo) => {
+        const defaultCards = new Section({items: [cardInfo], renderer: (cardInfo) => {
+                const card = utils.createNewCard (cardInfo.name, cardInfo.link);
+
+                defaultCards.addItem(card);
+            } }, constants.cardsListSelector);
+
+        defaultCards.renderItems();
+    })
+})
 
 /* Создаём PopupWithForm для popupEdit, вешаем слушателей */
 export const popupEdit = new PopupWithForm({popupSelector:constants.popupEditSelector,
@@ -42,14 +73,7 @@ export function handleCardClick(src, alt) {
 
 popupWithImage.setEventListeners();
 
-/* Создание элементов по дефолту через Section */
-export const defaultCards = new Section({items: constants.initialCards, renderer: (item) => {
-        const card = utils.createNewCard (item.name, item.link);
 
-        defaultCards.addItem(card);
-    } }, constants.cardsListSelector);
-
-defaultCards.renderItems();
 
 /* Создание объектов валидации форм */
 export const validateAddForm = new FormValidator(constants.formValidationParam, constants.addForm);
