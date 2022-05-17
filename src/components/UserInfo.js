@@ -20,6 +20,11 @@ export default class UserInfo {
     setUserInfo(data) {
         this._accountName.textContent = data.name;
         this._accountAbout.textContent = data.about;
+
+        this.setUserAvatar(data);
+    }
+
+    setUserAvatar(data) {
         this._accountAvatar.src = data.avatar;
         this._accountAvatar.alt = data.name;
     }

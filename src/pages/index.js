@@ -11,10 +11,10 @@ import * as utils from '../utils/utils.js';
 
 /* Создаём API */
 export const api = new Api({
-    url: 'https://nomoreparties.co/v1/cohort-41/',
+    url: 'nomoreparties.co/v1/cohort-41/',
     headers: {
         authorization: 'aa481936-6a56-438a-a67e-3ded844326aa',
-        "content-type": 'application/json'
+        "Content-Type": 'application/json'
     }
 });
 
@@ -30,6 +30,8 @@ userCloudInfo.then((data) => {
 /* Создание элементов по дефолту с сервера через Section */
 const cardsCloudInfo = api.getCardsInfo();
 
+const defaultCardsGlobal = {};
+
 cardsCloudInfo.then((data) => {
     data.map((cardInfo) => {
         const defaultCards = new Section({items: [cardInfo], renderer: (cardInfo) => {
@@ -38,15 +40,19 @@ cardsCloudInfo.then((data) => {
                 defaultCards.addItem(card);
             } }, constants.cardsListSelector);
 
+        defaultCardsGlobal.inner = defaultCards;
+
         defaultCards.renderItems();
     })
 })
 
-/* Создаём PopupWithForm для popupEdit, вешаем слушателей */
+/* Создаём PopupWithForm для popupEdit, колбэк formSubmit меняет данные на сервере, вешаем слушателей */
 export const popupEdit = new PopupWithForm({popupSelector:constants.popupEditSelector,
     formSubmit: (updatedAccountData) => {
-        userInfo.setUserInfo(updatedAccountData);
-
+        api.changeUserInfo(updatedAccountData)
+        .then((res) => {
+            userInfo.setUserInfo(res);
+        });
         popupEdit.close();
     }
 });
@@ -56,15 +62,20 @@ popupEdit.setEventListeners();
 /* Создаём PopupWithForm для popupAdd, вешаем слушателей */
 export const popupAdd = new PopupWithForm({popupSelector: constants.popupAddSelector,
     formSubmit: (data) => {
-        defaultCards.addItem(utils.createNewCard(data['place-name-input'], data['url-input']));
+    api.addCard(data)
+        .then((res) => {
+            console.log(res);
+            const defaultCards = defaultCardsGlobal.inner;
 
+            defaultCards.addItem(utils.createNewCard(res.name, res.link));
+        })
         popupAdd.close();
     }
 });
 
 popupAdd.setEventListeners();
 
-/* Создаём PopupWithImage, создаём функцию для открытия поап по клику на изображение, вешаем слушателей */
+/* Создаём PopupWithImage, создаём функцию для открытия popUp по клику на изображение, вешаем слушателей */
 export const popupWithImage = new PopupWithImage(constants.popupImageSelector);
 
 export function handleCardClick(src, alt) {

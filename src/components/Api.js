@@ -13,15 +13,39 @@ export default class Api {
     }
 
     getUserInfo() {
-        return fetch(`${this._url}users/me`, {
+        return fetch(`https://${this._url}users/me`, {
             headers: this._headers
         })
             .then(this._errorHandler)
     }
 
     getCardsInfo() {
-        return fetch(`${this._url}cards`, {
+        return fetch(`https://mesto.${this._url}cards`, {
             headers: this._headers
+        })
+            .then(this._errorHandler)
+    }
+
+    changeUserInfo(data) {
+        return fetch(`https://mesto.${this._url}users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: data['name-input'],
+                about: data['about-input']
+            })
+        })
+            .then(this._errorHandler)
+    }
+
+    addCard(data) {
+        return fetch(`https://mesto.${this._url}cards`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: data['place-name-input'],
+                link: data['url-input']
+            })
         })
             .then(this._errorHandler)
     }
