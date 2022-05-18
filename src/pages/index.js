@@ -87,7 +87,11 @@ popupWithImage.setEventListeners();
 
 /* Создаём confirm popup */
 
-const confirmPopup = new Popup(constants.popupConfirmSelector);
+const confirmPopup = new PopupWithForm({popupSelector: constants.popupConfirmSelector,
+    formSubmit: () => {
+
+    }
+});
 confirmPopup.setEventListeners();
 
 /* Создание объектов валидации форм */

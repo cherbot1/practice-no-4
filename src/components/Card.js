@@ -1,6 +1,6 @@
 import Api from "./Api";
 import {api} from "../pages";
-
+import * as constants from "../utils/constants.js"
 export class Card {
     constructor(data, templateSelector, handleCardClick) {
         this._title = data.name;
@@ -44,7 +44,8 @@ export class Card {
         });
 
         this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-            api.deleteCard(this._id)
+            constants.confirmPopup.classList.add('popup_opened');
+            api.deleteCard(this._id);
             this._element.remove();
         });
 
