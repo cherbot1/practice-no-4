@@ -13,6 +13,7 @@ export const cardsListSelector = '.elements__list';
 export const popupImageSelector = '.popup-image';
 export const popupEditSelector = '.popup-edit';
 export const popupAddSelector = '.popup-add';
+export const popupConfirmSelector = '.popup-confirm';
 export const nameSelector = '.profile__name';
 export const aboutSelector = '.profile__subtitle';
 export const avatarSelector = '.profile__avatar';
@@ -22,3 +23,4 @@ export const buttonOpenEditPopup = document.querySelector('.profile__edit-button
 export const buttonOpenAddPopup = document.querySelector('.profile__add-button');
 export const addForm = document.querySelector('.popup-add__form');
 export const editForm = document.querySelector('.popup-edit__form');
+

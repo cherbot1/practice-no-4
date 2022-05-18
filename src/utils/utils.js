@@ -1,12 +1,20 @@
 import { Card } from '../components/Card.js';
 import * as constants from './constants.js';
 import * as index from '../pages/index.js';
-
-
+import {handleCardClick, myId} from "../pages/index.js";
 
 /* Функция создания новой карточки */
-export function createNewCard(link, name) {
-    const card = new Card (link, name, '.card-template', index.handleCardClick);
+
+
+export function createNewCard(data) {
+    const card = new Card ({
+        link: data.link,
+        name: data.name,
+        likes: data.likes,
+        _id: data._id,
+        myId: myId,
+        userId: data.owner._id
+    }, '.card-template', handleCardClick);
     const cardElement = card.generateCard();
 
     return cardElement;

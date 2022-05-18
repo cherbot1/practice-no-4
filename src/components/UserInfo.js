@@ -10,7 +10,7 @@ export default class UserInfo {
         const accountInfo = {
             name: this._accountName.textContent,
             about: this._accountAbout.textContent,
-            avatar: this._accountAvatar.src
+            avatar: this._accountAvatar.src,
         }
 
         return accountInfo;

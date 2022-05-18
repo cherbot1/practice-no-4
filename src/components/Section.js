@@ -17,4 +17,9 @@ export default class Section {
     addItem(element) {
         this._container.prepend(element);
     }
+
+    /* Добавляем карточки с сервера в обратном порядке для корректного отображения */
+    addCloudItem(element) {
+        this._container.append(element);
+    }
 }

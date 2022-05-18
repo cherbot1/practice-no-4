@@ -4,6 +4,7 @@ import { FormValidator } from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import Popup from "../components/Popup";
 import UserInfo from '../components/UserInfo.js';
 import Api from "../components/Api";
 import * as constants from '../utils/constants.js';
@@ -22,8 +23,10 @@ export const api = new Api({
 export const userInfo = new UserInfo(constants.nameSelector, constants.aboutSelector, constants.avatarSelector);
 
 const userCloudInfo = api.getUserInfo();
+export let myId;
 
 userCloudInfo.then((data) => {
+    myId = data._id;
     userInfo.setUserInfo(data);
 });
 
@@ -35,9 +38,8 @@ const defaultCardsGlobal = {};
 cardsCloudInfo.then((data) => {
     data.map((cardInfo) => {
         const defaultCards = new Section({items: [cardInfo], renderer: (cardInfo) => {
-                const card = utils.createNewCard (cardInfo.name, cardInfo.link);
-
-                defaultCards.addItem(card);
+                const card = utils.createNewCard(cardInfo);
+                defaultCards.addCloudItem(card);
             } }, constants.cardsListSelector);
 
         defaultCardsGlobal.inner = defaultCards;
@@ -64,10 +66,9 @@ export const popupAdd = new PopupWithForm({popupSelector: constants.popupAddSele
     formSubmit: (data) => {
     api.addCard(data)
         .then((res) => {
-            console.log(res);
             const defaultCards = defaultCardsGlobal.inner;
 
-            defaultCards.addItem(utils.createNewCard(res.name, res.link));
+            defaultCards.addItem(utils.createNewCard(res));
         })
         popupAdd.close();
     }
@@ -84,7 +85,10 @@ export function handleCardClick(src, alt) {
 
 popupWithImage.setEventListeners();
 
+/* Создаём confirm popup */
 
+const confirmPopup = new Popup(constants.popupConfirmSelector);
+confirmPopup.setEventListeners();
 
 /* Создание объектов валидации форм */
 export const validateAddForm = new FormValidator(constants.formValidationParam, constants.addForm);

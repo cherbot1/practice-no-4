@@ -49,4 +49,29 @@ export default class Api {
         })
             .then(this._errorHandler)
     }
+
+    deleteCard(id) {
+        return fetch(`https://mesto.${this._url}cards/${id}`, {
+            method: 'DELETE',
+            headers: this._headers,
+        })
+            .then(this._errorHandler)
+    }
+
+    addLike(id) {
+        return fetch(`https://mesto.${this._url}cards/${id}/likes`, {
+            method: 'PUT',
+            headers: this._headers,
+        })
+            .then(this._errorHandler)
+
+    }
+
+    removeLike(id) {
+        return fetch(`https://mesto.${this._url}cards/${id}/likes`, {
+            method: 'DELETE',
+            headers: this._headers,
+        })
+            .then(this._errorHandler)
+    }
 }
