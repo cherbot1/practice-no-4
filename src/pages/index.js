@@ -1,14 +1,14 @@
 import './index.css';
-import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-import Popup from "../components/Popup";
+import PopupWithConfirm from "../components/PopupWithConfirm";
 import UserInfo from '../components/UserInfo.js';
 import Api from "../components/Api";
 import * as constants from '../utils/constants.js';
 import * as utils from '../utils/utils.js';
+/* import {deleteCard} from "../utils/utils.js"; */
 
 /* Создаём API */
 export const api = new Api({
@@ -87,11 +87,7 @@ popupWithImage.setEventListeners();
 
 /* Создаём confirm popup */
 
-const confirmPopup = new PopupWithForm({popupSelector: constants.popupConfirmSelector,
-    formSubmit: () => {
-
-    }
-});
+export const confirmPopup = new PopupWithConfirm(constants.popupConfirmSelector, /*deleteCard*/);
 confirmPopup.setEventListeners();
 
 /* Создание объектов валидации форм */

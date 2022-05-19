@@ -19,7 +19,6 @@ export const aboutSelector = '.profile__subtitle';
 export const avatarSelector = '.profile__avatar';
 export const nameInput = document.querySelector('.popup__input_name');
 export const subtitleInput = document.querySelector('.popup__input_subtitle');
-export const confirmPopup = document.querySelector('.popup-confirm');
 export const buttonOpenEditPopup = document.querySelector('.profile__edit-button');
 export const buttonOpenAddPopup = document.querySelector('.profile__add-button');
 export const addForm = document.querySelector('.popup-add__form');
