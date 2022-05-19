@@ -4,17 +4,20 @@ export default class Popup {
         this._closePopupWithEsc = this._handleEscClose.bind(this);
     }
 
+    /* Метод для закрытия по Esc */
     _handleEscClose(evt) {
         if (evt.key === 'Escape') {
             this.close();
         }
     }
 
+    /* Метод открытия */
     open() {
         this._popup.classList.add('popup_opened');
         document.addEventListener('keydown', this._closePopupWithEsc);
     }
 
+    /* Метод закрытия */
     close() {
         this._popup.classList.remove('popup_opened');
         document.removeEventListener('keydown', this._closePopupWithEsc);

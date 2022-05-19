@@ -1,11 +1,11 @@
 import Card from '../components/Card.js';
 import * as constants from './constants.js';
 import * as index from '../pages/index.js';
-import {api, handleCardClick, myId} from "../pages/index.js";
+import {api, handleCardClick, myId, validateChangeAvatarForm} from "../pages/index.js";
+import PopupWithConfirm from "../components/PopupWithConfirm";
+
 
 /* Функция создания новой карточки */
-
-
 export function createNewCard(data) {
     const card = new Card ({
         link: data.link,
@@ -20,11 +20,14 @@ export function createNewCard(data) {
     return cardElement;
 }
 
+/* Функция открытия ConfirmPopup */
 export function openConfirmPopup(card) {
     index.confirmPopup.open(card);
 }
 
+/* Функция для удаления карточки и со страницы и с сервера*/
 export function deleteCard(card) {
+    index.confirmPopup.renderLoading();
     api.deleteCard(card._id)
         .then(() => {
             card.deleteCard();
@@ -32,6 +35,9 @@ export function deleteCard(card) {
         })
         .catch((err) => {
             console.log(err);
+        })
+        .finally(() => {
+            index.confirmPopup.loadingFinished();
         })
 }
 
@@ -54,6 +60,14 @@ export function openEditPopup() {
     index.validateEditForm.resetValidation();
 }
 
+/* Функция открытия ChangeAvatarPopup */
+export function openChangeAvatarPopup() {
+    index.changeAvatarPopup.open();
+
+    index.validateChangeAvatarForm.resetValidation();
+}
+
 /* Слушатели кнопок открытия popup */
 constants.buttonOpenEditPopup.addEventListener('click', openEditPopup);
 constants.buttonOpenAddPopup.addEventListener('click', openAddPopup);
+constants.buttonOpenAvatarChange.addEventListener('click', openChangeAvatarPopup);

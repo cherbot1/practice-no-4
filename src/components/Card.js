@@ -13,7 +13,7 @@ export default class Card {
         this._id = data._id;
         this._handleCardDelete = handleCardDelete;
     }
-
+    /* Получаем шаблон */
     _getTemplate() {
         const cardElement = document
             .querySelector(this._templateSelector)
@@ -23,7 +23,7 @@ export default class Card {
 
         return cardElement;
     }
-
+    /* Вешаем слушателей */
     _setEventListeners() {
         this._element.querySelector('.element__like-button').addEventListener('click',  (evt) => {
             if (!evt.target.classList.contains('element__like-button_active')) {
@@ -31,14 +31,20 @@ export default class Card {
                 api.addLike(this._id)
                     .then((res) => {
                         this._changeLikesQuantity(res);
-                    });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
                 this._likeCounter.textContent = this._likes.length;
             } else {
                 evt.target.classList.remove('element__like-button_active');
                 api.removeLike(this._id)
                     .then((res) => {
                         this._changeLikesQuantity(res);
-                    });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
                 this._likeCounter.textContent = this._likes.length;
             }
         });
@@ -51,29 +57,34 @@ export default class Card {
         this._element.querySelector('.element__image').addEventListener('click', () => {
             this._handleCardClick(this._title, this._src);
         });
-    }
+    };
 
+    /* Меняем отображение количества лайков */
     _changeLikesQuantity(data) {
         this._likeCounter.textContent = data.likes.length;
-    }
+    };
 
+    /* Проверка владельца карточки */
     _isMyCard() {
         if (this._userId !== this._myId) {
             this._deleteButton.style.display = 'none';
         }
-    }
+    };
 
+    /* Проверка наличия моего лайка */
     _hasMyLike() {
         const hasLike = this._likes.find((user) => {
             return user._id === this._myId;
         });
         return hasLike;
-    }
+    };
 
+    /* Функция удаления карточки со страницы */
     deleteCard() {
         this._element.remove();
-    }
+    };
 
+    /* Создание карточки */
     generateCard() {
         this._element = this._getTemplate();
         this._deleteButton =  this._element.querySelector('.element__delete-button');
@@ -93,7 +104,7 @@ export default class Card {
         this._isMyCard();
 
         return  this._element;
-    }
+    };
 }
 
 

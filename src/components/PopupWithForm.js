@@ -1,12 +1,13 @@
 import Popup from './Popup.js';
 
-
 export default class PopupWithForm extends Popup {
     constructor({popupSelector, formSubmit}) {
         super(popupSelector);
         this._formSubmit = formSubmit;
         this._popupForm = this._popup.querySelector('.popup__form');
         this._inputList = this._popupForm.querySelectorAll('.popup__input');
+        this._saveButton = this._popup.querySelector('.popup__save-button');
+        this._saveButtonDefaultText = this._saveButton.textContent;
     }
 
     /* Собираем данные из инпутов форм */
@@ -18,6 +19,16 @@ export default class PopupWithForm extends Popup {
         });
 
         return formValues;
+    }
+
+    /* Метод для улучшения UX */
+    renderLoading() {
+        this._saveButton.textContent = 'Сохранение...';
+    }
+
+    /* Метод для улучшения UX */
+    loadingFinished() {
+        this._saveButton.textContent = this._saveButtonDefaultText;
     }
 
     /* Переписан метод для сброса валидации формы */

@@ -10,7 +10,6 @@ import * as constants from '../utils/constants.js';
 import * as utils from '../utils/utils.js';
 import {deleteCard} from "../utils/utils.js";
 
-
 /* Создаём API */
 export const api = new Api({
     url: 'nomoreparties.co/v1/cohort-41/',
@@ -52,10 +51,17 @@ cardsCloudInfo.then((data) => {
 /* Создаём PopupWithForm для popupEdit, колбэк formSubmit меняет данные на сервере, вешаем слушателей */
 export const popupEdit = new PopupWithForm({popupSelector:constants.popupEditSelector,
     formSubmit: (updatedAccountData) => {
+        popupEdit.renderLoading();
         api.changeUserInfo(updatedAccountData)
-        .then((res) => {
-            userInfo.setUserInfo(res);
-        });
+            .then((res) => {
+                userInfo.setUserInfo(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
+                popupEdit.loadingFinished();
+            })
         popupEdit.close();
     }
 });
@@ -65,11 +71,18 @@ popupEdit.setEventListeners();
 /* Создаём PopupWithForm для popupAdd, вешаем слушателей */
 export const popupAdd = new PopupWithForm({popupSelector: constants.popupAddSelector,
     formSubmit: (data) => {
+        popupAdd.renderLoading();
     api.addCard(data)
         .then((res) => {
             const defaultCards = defaultCardsGlobal.inner;
 
             defaultCards.addItem(utils.createNewCard(res));
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .finally(() => {
+            popupAdd.loadingFinished();
         })
         popupAdd.close();
     }
@@ -87,17 +100,37 @@ export function handleCardClick(src, alt) {
 popupWithImage.setEventListeners();
 
 /* Создаём confirm popup */
-
 export const confirmPopup = new PopupWithConfirm(constants.popupConfirmSelector, deleteCard);
 confirmPopup.setEventListeners();
+
+/* Создаём changeAvatarPopup */
+export const changeAvatarPopup = new PopupWithForm({popupSelector: constants.popupChangeAvatarSelector,
+    formSubmit: (data) => {
+        changeAvatarPopup.renderLoading();
+    api.changeAvatar(data)
+        .then((res) => {
+            document.querySelector('.profile__avatar').src = res.avatar;
+            changeAvatarPopup.close();
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .finally(() => {
+            changeAvatarPopup.loadingFinished();
+        })
+    }
+});
+changeAvatarPopup.setEventListeners();
 
 /* Создание объектов валидации форм */
 export const validateAddForm = new FormValidator(constants.formValidationParam, constants.addForm);
 export const validateEditForm = new FormValidator(constants.formValidationParam, constants.editForm);
+export const validateChangeAvatarForm = new FormValidator(constants.formValidationParam, constants.changeAvatarForm);
 
 /* Активация функции валидации */
 validateAddForm.enableValidation();
 validateEditForm.enableValidation();
+validateChangeAvatarForm.enableValidation();
 
 
 

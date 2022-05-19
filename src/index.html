@@ -19,7 +19,7 @@
         <section class="profile">
             <div class="profile__profile-info">
                 <div class="profile__avatar-container">
-                    <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Аватар">
+                    <img class="profile__avatar" src="" alt="Аватар">
                     <div class="profile__edit-background"></div>
                     <img class="profile__avatar-edit" src="<%=require('./images/edit.png')%>" alt="Изменить" title="Изменить аватар">
                 </div>
@@ -80,20 +80,20 @@
         </section>
 
         <section class="popup popup-confirm">
-            <form class="popup-confirm__form">
+            <form class="popup__form popup-confirm__form">
                 <button class="popup__close popup-confirm__close" type="button" aria-label="Закрыть" title="Закрыть"></button>
                 <h2 class="popup-confirm__title">Вы уверены?</h2>
-                <button class="popup-confirm__button">Да</button>
+                <button class="popup-confirm__button popup__save-button">Да</button>
             </form>
         </section>
 
         <section class="popup popup-change-avatar">
-            <form class="popup-change-avatar__form">
+            <form class="popup__form popup-change-avatar__form">
                 <button class="popup__close popup-change-avatar__close" type="button" aria-label="Закрыть" title="Закрыть"></button>
                 <h2 class="popup-change-avatar__title">Обновить аватар</h2>
                 <input type="url" id='avatar-url-input' class="popup__input popup-change-avatar__input popup-change-avatar__input_link" placeholder="Ссылка на картинку" required>
-                <span id='avatar-url-input-error' class="url-input-error popup__input-error popup__input-error_hidden"></span>
-                <button class="popup-change-avatar__button">Сохранить</button>
+                <span id='avatar-url-input-error' class="url-input-error popup__input-error popup-change-avatar__input-error popup__input-error_hidden"></span>
+                <button class="popup-change-avatar__button popup__save-button">Сохранить</button>
             </form>
         </section>
 
