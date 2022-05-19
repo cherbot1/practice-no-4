@@ -8,7 +8,8 @@ import UserInfo from '../components/UserInfo.js';
 import Api from "../components/Api";
 import * as constants from '../utils/constants.js';
 import * as utils from '../utils/utils.js';
-/* import {deleteCard} from "../utils/utils.js"; */
+import {deleteCard} from "../utils/utils.js";
+
 
 /* Создаём API */
 export const api = new Api({
@@ -87,7 +88,7 @@ popupWithImage.setEventListeners();
 
 /* Создаём confirm popup */
 
-export const confirmPopup = new PopupWithConfirm(constants.popupConfirmSelector, /*deleteCard*/);
+export const confirmPopup = new PopupWithConfirm(constants.popupConfirmSelector, deleteCard);
 confirmPopup.setEventListeners();
 
 /* Создание объектов валидации форм */

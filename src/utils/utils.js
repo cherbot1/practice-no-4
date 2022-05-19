@@ -14,24 +14,12 @@ export function createNewCard(data) {
         _id: data._id,
         myId: myId,
         userId: data.owner._id
-    }, '.card-template', handleCardClick,/* openConfirmPopup */);
+    }, '.card-template', handleCardClick, openConfirmPopup);
     const cardElement = card.generateCard();
 
     return cardElement;
 }
 
-/* Функции открытия popupEdit со сбросом валидации */
-export function openEditPopup() {
-    const accountData = index.userInfo.getUserInfo();
-
-    index.popupEdit.open();
-
-    constants.nameInput.value = accountData.name;
-    constants.subtitleInput.value = accountData.about;
-
-    index.validateEditForm.resetValidation();
-}
-/*
 export function openConfirmPopup(card) {
     index.confirmPopup.open(card);
 }
@@ -46,12 +34,24 @@ export function deleteCard(card) {
             console.log(err);
         })
 }
-*/
+
 /* Функция открытия popupAdd со сбросом валидации */
 export function openAddPopup() {
     index.popupAdd.open();
 
     index.validateAddForm.resetValidation();
+}
+
+/* Функции открытия popupEdit со сбросом валидации */
+export function openEditPopup() {
+    const accountData = index.userInfo.getUserInfo();
+
+    index.popupEdit.open();
+
+    constants.nameInput.value = accountData.name;
+    constants.subtitleInput.value = accountData.about;
+
+    index.validateEditForm.resetValidation();
 }
 
 /* Слушатели кнопок открытия popup */
