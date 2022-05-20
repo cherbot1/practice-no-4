@@ -18,7 +18,6 @@ export const popupChangeAvatarSelector = '.popup-change-avatar';
 export const nameSelector = '.profile__name';
 export const aboutSelector = '.profile__subtitle';
 export const avatarSelector = '.profile__avatar';
-export const inactiveButtonClass = 'popup__save-button_disabled';
 export const nameInput = document.querySelector('.popup__input_name');
 export const subtitleInput = document.querySelector('.popup__input_subtitle');
 export const buttonOpenEditPopup = document.querySelector('.profile__edit-button');

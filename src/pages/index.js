@@ -71,7 +71,8 @@ export const popupEdit = new PopupWithForm({popupSelector:constants.popupEditSel
             .finally(() => {
                 popupEdit.loadingFinished();
             })
-    }, inactiveButtonClass: constants.inactiveButtonClass});
+    }
+});
 
 popupEdit.setEventListeners();
 
@@ -93,7 +94,8 @@ export const popupAdd = new PopupWithForm({popupSelector: constants.popupAddSele
         .finally(() => {
             popupAdd.loadingFinished();
         })
-    }, inactiveButtonClass: constants.inactiveButtonClass});
+    }
+});
 
 popupAdd.setEventListeners();
 
@@ -125,7 +127,8 @@ export const changeAvatarPopup = new PopupWithForm({popupSelector: constants.pop
         .finally(() => {
             changeAvatarPopup.loadingFinished();
         })
-    }, inactiveButtonClass: constants.inactiveButtonClass});
+    }
+});
 
 changeAvatarPopup.setEventListeners();
 
