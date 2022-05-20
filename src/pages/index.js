@@ -10,6 +10,7 @@ import * as constants from '../utils/constants.js';
 import * as utils from '../utils/utils.js';
 import {deleteCard} from "../utils/utils.js";
 
+
 /* Создаём API */
 export const api = new Api({
     url: 'nomoreparties.co/v1/cohort-41/',
@@ -28,7 +29,10 @@ export let myId;
 userCloudInfo.then((data) => {
     myId = data._id;
     userInfo.setUserInfo(data);
-});
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 /* Создание элементов по дефолту с сервера через Section */
 const cardsCloudInfo = api.getCardsInfo();
@@ -45,16 +49,21 @@ cardsCloudInfo.then((data) => {
         defaultCardsGlobal.inner = defaultCards;
 
         defaultCards.renderItems();
+        })
     })
-})
+    .catch((err) => {
+        console.log(err);
+    })
 
 /* Создаём PopupWithForm для popupEdit, колбэк formSubmit меняет данные на сервере, вешаем слушателей */
 export const popupEdit = new PopupWithForm({popupSelector:constants.popupEditSelector,
     formSubmit: (updatedAccountData) => {
         popupEdit.renderLoading();
+
         api.changeUserInfo(updatedAccountData)
             .then((res) => {
                 userInfo.setUserInfo(res);
+                popupEdit.close();
             })
             .catch((err) => {
                 console.log(err);
@@ -62,9 +71,7 @@ export const popupEdit = new PopupWithForm({popupSelector:constants.popupEditSel
             .finally(() => {
                 popupEdit.loadingFinished();
             })
-        popupEdit.close();
-    }
-});
+    }, inactiveButtonClass: constants.inactiveButtonClass});
 
 popupEdit.setEventListeners();
 
@@ -72,21 +79,23 @@ popupEdit.setEventListeners();
 export const popupAdd = new PopupWithForm({popupSelector: constants.popupAddSelector,
     formSubmit: (data) => {
         popupAdd.renderLoading();
+        popupAdd.changeButtonStateOnLoad();
     api.addCard(data)
         .then((res) => {
             const defaultCards = defaultCardsGlobal.inner;
 
             defaultCards.addItem(utils.createNewCard(res));
+
+            popupAdd.close();
         })
         .catch((err) => {
             console.log(err);
         })
         .finally(() => {
             popupAdd.loadingFinished();
+            popupAdd.changeButtonStateOnLoad();
         })
-        popupAdd.close();
-    }
-});
+    }, inactiveButtonClass: constants.inactiveButtonClass});
 
 popupAdd.setEventListeners();
 
@@ -107,9 +116,10 @@ confirmPopup.setEventListeners();
 export const changeAvatarPopup = new PopupWithForm({popupSelector: constants.popupChangeAvatarSelector,
     formSubmit: (data) => {
         changeAvatarPopup.renderLoading();
+        changeAvatarPopup.changeButtonStateOnLoad();
     api.changeAvatar(data)
         .then((res) => {
-            document.querySelector('.profile__avatar').src = res.avatar;
+            userInfo.setUserAvatar(res);
             changeAvatarPopup.close();
         })
         .catch((err) => {
@@ -117,9 +127,10 @@ export const changeAvatarPopup = new PopupWithForm({popupSelector: constants.pop
         })
         .finally(() => {
             changeAvatarPopup.loadingFinished();
+            changeAvatarPopup.changeButtonStateOnLoad();
         })
-    }
-});
+    }, inactiveButtonClass: constants.inactiveButtonClass});
+
 changeAvatarPopup.setEventListeners();
 
 /* Создание объектов валидации форм */

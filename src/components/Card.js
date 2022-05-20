@@ -1,7 +1,5 @@
-import {api} from "../pages/index.js";
-
 export default class Card {
-    constructor(data, templateSelector, handleCardClick, handleCardDelete) {
+    constructor(data, templateSelector, handleCardClick, handleCardDelete, handleLike) {
         this._title = data.name;
         this._src = data.link;
         this._alt = data.name;
@@ -12,7 +10,9 @@ export default class Card {
         this._myId = data.myId;
         this._id = data._id;
         this._handleCardDelete = handleCardDelete;
+        this._handleLike = handleLike;
     }
+
     /* Получаем шаблон */
     _getTemplate() {
         const cardElement = document
@@ -23,30 +23,11 @@ export default class Card {
 
         return cardElement;
     }
+
     /* Вешаем слушателей */
     _setEventListeners() {
         this._element.querySelector('.element__like-button').addEventListener('click',  (evt) => {
-            if (!evt.target.classList.contains('element__like-button_active')) {
-                evt.target.classList.add('element__like-button_active');
-                api.addLike(this._id)
-                    .then((res) => {
-                        this._changeLikesQuantity(res);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-                this._likeCounter.textContent = this._likes.length;
-            } else {
-                evt.target.classList.remove('element__like-button_active');
-                api.removeLike(this._id)
-                    .then((res) => {
-                        this._changeLikesQuantity(res);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-                this._likeCounter.textContent = this._likes.length;
-            }
+            this._handleLike(evt, this);
         });
 
         this._deleteButton.addEventListener('click', () => {
@@ -82,6 +63,7 @@ export default class Card {
     /* Функция удаления карточки со страницы */
     deleteCard() {
         this._element.remove();
+        this._element = null;
     };
 
     /* Создание карточки */
@@ -89,11 +71,11 @@ export default class Card {
         this._element = this._getTemplate();
         this._deleteButton =  this._element.querySelector('.element__delete-button');
         this._likeCounter =  this._element.querySelector('.element__like-counter');
-
+        this._image = this._element.querySelector('.element__image');
         this._setEventListeners();
 
-        this._element.querySelector('.element__image').src = this._src;
-        this._element.querySelector('.element__image').alt = this._alt;
+        this._image.src = this._src;
+        this._image.alt = this._alt;
         this._element.querySelector('.element__figcaption-text').textContent = this._title;
         this._likeCounter.textContent = this._likes.length;
 

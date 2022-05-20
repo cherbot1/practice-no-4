@@ -7,17 +7,16 @@ export class FormValidator {
         this._inputErrorClass = param.inputErrorClass;
         this._errorClass = param.errorClass;
         this._inputsArray = Array.from(this._form.querySelectorAll(this._input));
+        this._exactSubmitButton = this._form.querySelector(this._submitButtonSelector);
     }
 
     /* Изменяем состояние кнопки */
     _changeButtonState = () => {
-        const submitButton = this._form.querySelector(this._submitButtonSelector);
-
         if (!this._form.checkValidity()){
-            submitButton.disabled = true;
-            submitButton.classList.add(this._inactiveButtonClass);
+            this._exactSubmitButton.disabled = true;
+            this._exactSubmitButton.classList.add(this._inactiveButtonClass);
         } else {
-            this._activateButton(submitButton);
+            this._activateButton(this._exactSubmitButton);
         }
     }
 
@@ -71,8 +70,7 @@ export class FormValidator {
 
     /* Сброс валидации */
     resetValidation = () => {
-        const submitButton = this._form.querySelector(this._submitButtonSelector);
-        this._activateButton(submitButton);
+        this._activateButton(this._exactSubmitButton);
 
         this._inputsArray.forEach((element) => {
             if (element.classList.contains(this._inputErrorClass) || element.checkValidity()) {

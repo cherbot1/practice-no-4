@@ -2,7 +2,6 @@ import Card from '../components/Card.js';
 import * as constants from './constants.js';
 import * as index from '../pages/index.js';
 import {api, handleCardClick, myId, validateChangeAvatarForm} from "../pages/index.js";
-import PopupWithConfirm from "../components/PopupWithConfirm";
 
 
 /* Функция создания новой карточки */
@@ -14,7 +13,7 @@ export function createNewCard(data) {
         _id: data._id,
         myId: myId,
         userId: data.owner._id
-    }, '.card-template', handleCardClick, openConfirmPopup);
+    }, '.card-template', handleCardClick, openConfirmPopup, likeCard);
     const cardElement = card.generateCard();
 
     return cardElement;
@@ -39,6 +38,31 @@ export function deleteCard(card) {
         .finally(() => {
             index.confirmPopup.loadingFinished();
         })
+}
+
+/* Функция добавления/удаления лайка */
+export function likeCard(evt, card) {
+    if (!evt.target.classList.contains('element__like-button_active')) {
+        evt.target.classList.add('element__like-button_active');
+        api.addLike(card._id)
+            .then((res) => {
+                card._changeLikesQuantity(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        card._likeCounter.textContent = card._likes.length;
+    } else {
+        evt.target.classList.remove('element__like-button_active');
+        api.removeLike(card._id)
+            .then((res) => {
+                card._changeLikesQuantity(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        card._likeCounter.textContent = card._likes.length;
+    }
 }
 
 /* Функция открытия popupAdd со сбросом валидации */

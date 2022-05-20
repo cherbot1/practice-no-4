@@ -1,13 +1,14 @@
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
-    constructor({popupSelector, formSubmit}) {
+    constructor({popupSelector, formSubmit, inactiveButtonClass}) {
         super(popupSelector);
         this._formSubmit = formSubmit;
         this._popupForm = this._popup.querySelector('.popup__form');
         this._inputList = this._popupForm.querySelectorAll('.popup__input');
         this._saveButton = this._popup.querySelector('.popup__save-button');
         this._saveButtonDefaultText = this._saveButton.textContent;
+        this._inactiveButtonClass = inactiveButtonClass;
     }
 
     /* Собираем данные из инпутов форм */
@@ -29,6 +30,15 @@ export default class PopupWithForm extends Popup {
     /* Метод для улучшения UX */
     loadingFinished() {
         this._saveButton.textContent = this._saveButtonDefaultText;
+    }
+
+    /* Метод деактивации кнопки */
+    changeButtonStateOnLoad() {
+        if (!this._saveButton.classList.contains(this._inactiveButtonClass)) {
+            this._saveButton.classList.add(this._inactiveButtonClass);
+        } else {
+            this._saveButton.classList.add(this._inactiveButtonClass);
+        }
     }
 
     /* Переписан метод для сброса валидации формы */
