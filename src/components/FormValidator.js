@@ -13,8 +13,7 @@ export class FormValidator {
     /* Изменяем состояние кнопки */
     _changeButtonState = () => {
         if (!this._form.checkValidity()){
-            this._exactSubmitButton.disabled = true;
-            this._exactSubmitButton.classList.add(this._inactiveButtonClass);
+            this._deactivateButton(this._exactSubmitButton);
         } else {
             this._activateButton(this._exactSubmitButton);
         }
@@ -58,9 +57,25 @@ export class FormValidator {
         button.classList.remove(this._inactiveButtonClass);
     }
 
+    /* Метод деактивации кнопки для форм с изображениями */
+
+    _deactivateButton = (button) => {
+        this._exactSubmitButton.disabled = true;
+        this._exactSubmitButton.classList.add(this._inactiveButtonClass);
+    }
+
     /* Функция для изменения состояния инпутов в случае ошибки */
     _changeErrorState = (input) => {
         this._isValid(input);
+    }
+
+    /* Функция сброса ошибок */
+    _resetErrors = () => {
+        this._inputsArray.forEach((element) => {
+            if (element.classList.contains(this._inputErrorClass) || element.checkValidity()) {
+                this._hideErrors(element);
+            }
+        });
     }
 
     /* Публичная функция для активации валидации формы */
@@ -69,13 +84,16 @@ export class FormValidator {
     }
 
     /* Сброс валидации */
+    /* Простите, я тупенький - после первого ревью не понял, что необходимо было сделать */
     resetValidation = () => {
-        this._activateButton(this._exactSubmitButton);
+        if (this._form.classList.contains('popup-add__form') || this._form.classList.contains('popup-change-avatar__form')) {
+            this._deactivateButton(this._exactSubmitButton);
 
-        this._inputsArray.forEach((element) => {
-            if (element.classList.contains(this._inputErrorClass) || element.checkValidity()) {
-                this._hideErrors(element);
-            }
-        });
+            this._resetErrors();
+        } else {
+            this._activateButton(this._exactSubmitButton);
+
+            this._resetErrors();
+        }
     }
 }

@@ -79,7 +79,6 @@ popupEdit.setEventListeners();
 export const popupAdd = new PopupWithForm({popupSelector: constants.popupAddSelector,
     formSubmit: (data) => {
         popupAdd.renderLoading();
-        popupAdd.changeButtonStateOnLoad();
     api.addCard(data)
         .then((res) => {
             const defaultCards = defaultCardsGlobal.inner;
@@ -93,7 +92,6 @@ export const popupAdd = new PopupWithForm({popupSelector: constants.popupAddSele
         })
         .finally(() => {
             popupAdd.loadingFinished();
-            popupAdd.changeButtonStateOnLoad();
         })
     }, inactiveButtonClass: constants.inactiveButtonClass});
 
@@ -116,7 +114,6 @@ confirmPopup.setEventListeners();
 export const changeAvatarPopup = new PopupWithForm({popupSelector: constants.popupChangeAvatarSelector,
     formSubmit: (data) => {
         changeAvatarPopup.renderLoading();
-        changeAvatarPopup.changeButtonStateOnLoad();
     api.changeAvatar(data)
         .then((res) => {
             userInfo.setUserAvatar(res);
@@ -127,7 +124,6 @@ export const changeAvatarPopup = new PopupWithForm({popupSelector: constants.pop
         })
         .finally(() => {
             changeAvatarPopup.loadingFinished();
-            changeAvatarPopup.changeButtonStateOnLoad();
         })
     }, inactiveButtonClass: constants.inactiveButtonClass});
 

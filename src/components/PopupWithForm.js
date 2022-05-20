@@ -32,15 +32,6 @@ export default class PopupWithForm extends Popup {
         this._saveButton.textContent = this._saveButtonDefaultText;
     }
 
-    /* Метод деактивации кнопки */
-    changeButtonStateOnLoad() {
-        if (!this._saveButton.classList.contains(this._inactiveButtonClass)) {
-            this._saveButton.classList.add(this._inactiveButtonClass);
-        } else {
-            this._saveButton.classList.add(this._inactiveButtonClass);
-        }
-    }
-
     /* Переписан метод для сброса валидации формы */
     close() {
         super.close();
